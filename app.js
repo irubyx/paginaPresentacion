@@ -8,7 +8,7 @@
 
 // Calcular postre primera clase
 
-const calcular = () => {
+function calcular() {
     const primeraClase = parseInt(document.getElementById("primeraClase").value)
     const economica = parseInt(document.getElementById("economica").value)
     const niños = parseInt(document.getElementById("niños").value)
