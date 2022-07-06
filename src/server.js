@@ -35,17 +35,17 @@ const { exec } = require('child_process');
 const { stdout } = require("process")
 
 app.get("/script", (req, res) => {
-    let resu = ""
-    const script = exec('echo hola',
+    let test
+    const script = exec('bash jobRun.sh',
     (error, stdout, stderr) => {
-        resu = stdout
+        console.log(stdout)
         console.log(stderr);
         if (error !== null) {
             console.log(`exec error: ${error}`);
         }
     });
 
-    res.send(resu)
+    res.send("testing")
 })
 
 app.get("*", (req, res) => {

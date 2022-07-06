@@ -13,7 +13,7 @@ msgOne.textContent = ""
 msgTwo.textContent = ""
 
 fFlightForm.addEventListener("submit", (e) => {
-    // e.preventDefault()
+    e.preventDefault()
 
     // msgOne.textContent = "Loading..."
     // msgTwo.textContent = ""
