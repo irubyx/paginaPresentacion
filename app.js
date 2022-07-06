@@ -8,8 +8,6 @@
 
 // Calcular postre primera clase
 
-const express = require("express")
-
 function calcular() {
     const primeraClase = parseInt(document.getElementById("primeraClase").value)
     const economica = parseInt(document.getElementById("economica").value)

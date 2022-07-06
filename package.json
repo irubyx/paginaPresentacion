@@ -1,23 +1,16 @@
 {
-  "name": "paginapresentacion",
+  "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/irubyx/paginaPresentacion.git"
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/irubyx/paginaPresentacion/issues"
-  },
-  "homepage": "https://github.com/irubyx/paginaPresentacion#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "hbs": "^4.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
