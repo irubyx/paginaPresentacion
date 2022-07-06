@@ -10,9 +10,20 @@
         <div class="main-content">
             {{>header}}
             <p>Use this site for...</p>
+            <form id="formulario">
+                <input type="text" id="fistClass" placeholder="Number of First Class">
+                <input type="text" id="economy" placeholder="Number of Economy">
+                <input type="text" id="children" placeholder="Number of Children">
+                <input type="text" id="hours" placeholder="Flight hours">
+                <button>Calculate</button>
+            </form>
+
+            <p id="message-1"></p>
+            <p id="message-2"></p>
 
         </div>
         {{>footer}}
+        <script src="../../public/js/app.js"></script>
     </body>
 
 </html>

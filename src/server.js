@@ -1,7 +1,6 @@
 const path = require("path")
 const express = require("express")
 const hbs = require("hbs")
-const { Script } = require("vm")
 
 const app = express()
 
@@ -32,14 +31,21 @@ app.get("/about", (req, res) => {
     })
 })
 
-app.get("/script", (req, res) => {
-    if (!req.query){
-        return res.send({
-            error: "You have to provide all parameters"
-        })
-    }
+const { exec } = require('child_process');
+const { stdout } = require("process")
 
-    res.send("xd")
+app.get("/script", (req, res) => {
+    let resu = ""
+    const script = exec('echo hola',
+    (error, stdout, stderr) => {
+        resu = stdout
+        console.log(stderr);
+        if (error !== null) {
+            console.log(`exec error: ${error}`);
+        }
+    });
+
+    res.send(resu)
 })
 
 app.get("*", (req, res) => {
