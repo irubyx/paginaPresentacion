@@ -36,13 +36,13 @@ const { stdout } = require("process")
 
 app.get("/script", (req, res) => {
     let resu = ""
-    const script = exec('echo hola',
+    const script = exec(`/usr/bin/bash /var/www/html/pagina/src/jobRun.sh ${req.query.val1} ${req.query.val2} ${req.query.val3} ${req.query.val4}`,
     (error, stdout, stderr) => {
-        resu = stdout
-        console.log(stderr);
         if (error !== null) {
             console.log(`exec error: ${error}`);
+            console.log(stderr);
         }
+        resu = stdout
     });
 
     res.send(resu)
