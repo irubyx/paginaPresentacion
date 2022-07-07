@@ -45,7 +45,7 @@ app.get("/script", (req, res) => {
         resu = stdout
     });
 
-    res.send(resu)
+    res.send("testing")
 })
 
 app.get("*", (req, res) => {
