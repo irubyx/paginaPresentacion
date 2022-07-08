@@ -23,18 +23,17 @@ fFlightForm.addEventListener("submit", (e) => {
     msgOne.textContent = "Calculating..."
     msgTwo.textContent = ""
 
-    // Execute script
-    // fetch(`/script?firstClass=${firstClass}&economy=${economy}&children=${children}&hours=${hours}`).then((response)=>{
-    //     response.json().then((data) => {
-    //         if (data.error) {
-    //             msgOne.textContent = data.error
-    //         } else {
-    //             const answer = data.result.split("XXX")[1].trim().replace("\n","")
-    //             msgOne.textContent = "Here we have the results:"
-    //             msgTwo.textContent = answer
-    //         }
-    //     })
-    // })
+    fetch(`/script?firstClass=${firstClass}&economy=${economy}&children=${children}&hours=${hours}`).then((response)=>{
+        response.json().then((data) => {
+            if (data.error) {
+                msgOne.textContent = data.error
+            } else {
+                const answer = data.result.split("XXX")[1].trim().replace("\n","")
+                msgOne.textContent = "Here we have the results:"
+                msgTwo.textContent = answer
+            }
+        })
+    })
 })
 
 // Calcular agua: 1 litro x persona

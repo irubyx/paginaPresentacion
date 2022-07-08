@@ -2,6 +2,8 @@ const path = require("path")
 const express = require("express")
 const hbs = require("hbs")
 
+const runScript = require("./utils/runScript")
+
 const app = express()
 
 // Define paths for express config
@@ -49,32 +51,19 @@ const { exec } = require('child_process');
 const { stdout } = require("process")
 
 app.get("/script", (req, res) => {
-    // Falta manejo de error
-    let test
-    const script = exec(`/usr/bin/bash /var/www/html/pagina/src/jobRun.sh ${req.query.val1} ${req.query.val2} ${req.query.val3} ${req.query.val4}`,
-        (error, stdout, stderr) => {
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-                console.log(stderr);
-            }
-            test = stdout.split("'")
-            test = test[test.length - 2]
-            test = test.replace("get -n", "logs --jobrun")
+    if (!req.query.val1 || !req.query.val2 || !req.query.val3 || !req.query.val4){
+        return res.send({
+            error: "You must provide a value for every field..."
+        })
+    }
+    
+    runScript(req.query.val1,req.query.val2,req.query.val3,req.query.val4, (error, {response} = {}) => {
+        if (error) {
+            return res.send({ error })
+        }
 
-            setTimeout(() => {
-                const script = exec(`test`,
-                    (error, stdout, stderr) => {
-                        console.log(stdout)
-                        res.send({stdout})
-                        if (error !== null) {
-                            console.log(`exec error: ${error}`);
-                            console.log(stderr);
-                        }
-                    });
-            }, 5000)
-        });
-
-    //res.send(test)
+        res.send({response})
+    })
 })
 
 app.get("*", (req, res) => {
