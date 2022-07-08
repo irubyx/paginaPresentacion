@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+    <head>
+        <title>Watson Airlines</title>
+        <link rel="icon" href="/img/icon.png">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+        <div class="main-content">
+            {{>header}}
+            <p>Calculate how much food your flight will need.</p>
+
+            <form id="formulario">
+                <input type="text" id="firstClass" placeholder="Number of First Class">
+                <input type="text" id="economy" placeholder="Number of Economy">
+                <input type="text" id="children" placeholder="Number of Children">
+                <input type="text" id="hours" placeholder="Flight hours">
+                <button>Calculate</button>
+            </form>
+
+            <p id="message-1"></p>
+            <p id="message-2"></p>
+
+        </div>
+        {{>footer}}
+        <script src="/js/app.js"></script>
+    </body>
+
+</html>

@@ -24,6 +24,20 @@ app.get("", (req, res) => {
     })
 })
 
+app.get("/flights", (req, res) => {
+    res.render("flights", {
+        title: "Flight Status",
+        name: "Sebastian Fripp & Juan Ignacio Prina"
+    })
+})
+
+app.get("/food", (req, res) => {
+    res.render("food", {
+        title: "Food Service",
+        name: "Sebastian Fripp & Juan Ignacio Prina"
+    })
+})
+
 app.get("/about", (req, res) => {
     res.render("about", {
         title: "About us",
@@ -35,17 +49,32 @@ const { exec } = require('child_process');
 const { stdout } = require("process")
 
 app.get("/script", (req, res) => {
-    let resu
+    // Falta manejo de error
+    let test
     const script = exec(`/usr/bin/bash /var/www/html/pagina/src/jobRun.sh ${req.query.val1} ${req.query.val2} ${req.query.val3} ${req.query.val4}`,
-    (error, stdout, stderr) => {
-        if (error !== null) {
-            console.log(`exec error: ${error}`);
-            console.log(stderr);
-        }
-        resu = stdout
-    });
+        (error, stdout, stderr) => {
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+                console.log(stderr);
+            }
+            test = stdout.split("'")
+            test = test[test.length - 2]
+            test = test.replace("get -n", "logs --jobrun")
 
-    res.send("testing")
+            setTimeout(() => {
+                const script = exec(`test`,
+                    (error, stdout, stderr) => {
+                        console.log(stdout)
+                        res.send({stdout})
+                        if (error !== null) {
+                            console.log(`exec error: ${error}`);
+                            console.log(stderr);
+                        }
+                    });
+            }, 5000)
+        });
+
+    //res.send(test)
 })
 
 app.get("*", (req, res) => {

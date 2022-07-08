@@ -15,12 +15,26 @@ msgTwo.textContent = ""
 fFlightForm.addEventListener("submit", (e) => {
     e.preventDefault()
 
-    msgOne.textContent = "Loading..."
+    const firstClass = fFirstClass.value
+    const economy = fEconomy.value
+    const children = fChildren.value
+    const hours = fHours.value
+
+    msgOne.textContent = "Calculating..."
     msgTwo.textContent = ""
 
     // Execute script
-
-    console.log("testing")
+    // fetch(`/script?firstClass=${firstClass}&economy=${economy}&children=${children}&hours=${hours}`).then((response)=>{
+    //     response.json().then((data) => {
+    //         if (data.error) {
+    //             msgOne.textContent = data.error
+    //         } else {
+    //             const answer = data.result.split("XXX")[1].trim().replace("\n","")
+    //             msgOne.textContent = "Here we have the results:"
+    //             msgTwo.textContent = answer
+    //         }
+    //     })
+    // })
 })
 
 // Calcular agua: 1 litro x persona
