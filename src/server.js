@@ -47,21 +47,17 @@ app.get("/about", (req, res) => {
     })
 })
 
-const { exec } = require('child_process');
-const { stdout } = require("process")
-
 app.get("/script", (req, res) => {
-    if (!req.query.val1 || !req.query.val2 || !req.query.val3 || !req.query.val4){
+    if (!req.query.firstClass || !req.query.economy || !req.query.children || !req.query.hours){
         return res.send({
             error: "You must provide a value for every field..."
         })
     }
     
-    runScript(req.query.val1,req.query.val2,req.query.val3,req.query.val4, (error, {response} = {}) => {
+    runScript(req.query.firstClass,req.query.economy,req.query.children,req.query.hours, (error, {response} = {}) => {
         if (error) {
             return res.send({ error })
         }
-
         res.send({response})
     })
 })

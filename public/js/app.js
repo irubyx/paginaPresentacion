@@ -28,7 +28,7 @@ fFlightForm.addEventListener("submit", (e) => {
             if (data.error) {
                 msgOne.textContent = data.error
             } else {
-                const answer = data.result.split("XXX")[1].trim().replace("\n","")
+                const answer = data.result.split("XXX")[1].replaceAll("\n","").trim()
                 msgOne.textContent = "Here we have the results:"
                 msgTwo.textContent = answer
             }

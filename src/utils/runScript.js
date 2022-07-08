@@ -1,3 +1,6 @@
+const { exec } = require('child_process');
+const { stdout } = require("process")
+
 const runScript = (firstClass, economy, children, hours, callBack) => {
     try {
         let test
@@ -12,7 +15,7 @@ const runScript = (firstClass, economy, children, hours, callBack) => {
                         (error, stdout, stderr) => {
                             test = stdout
                         });
-                }, 5000)
+                }, 15000)
             });
 
         callBack(undefined, { result: test })
