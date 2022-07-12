@@ -48,17 +48,16 @@ app.get("/about", (req, res) => {
 })
 
 app.get("/script", (req, res) => {
-    if (!req.query.firstClass || !req.query.economy || !req.query.children || !req.query.hours){
+    if (!req.query.firstClass || !req.query.economy || !req.query.children || !req.query.hours) {
         return res.send({
             error: "You must provide a value for every field..."
         })
     }
-    
-    runScript(req.query.firstClass,req.query.economy,req.query.children,req.query.hours, (error, {response} = {}) => {
-        if (error) {
-            return res.send({ error })
-        }
-        res.send({response})
+
+    runScript(req.query.firstClass, req.query.economy, req.query.children, req.query.hours).then((data) => {
+        res.send({ data })
+    }).catch((e) => {
+        res.send({ e })
     })
 })
 
