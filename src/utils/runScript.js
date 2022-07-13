@@ -25,7 +25,7 @@ const { stdout } = require("process")
 const runScript = (firstClass, economy, children, hours) => {
     let test
     const script = execSync(`/usr/bin/bash /var/www/html/pagina/src/jobRun.sh ${firstClass} ${economy} ${children} ${hours}`)
-    test = script.split("'")
+    test = script.toString().split("'")
     test = test[test.length - 2]
     test = test.replace("get -n", "logs --jobrun")
 
