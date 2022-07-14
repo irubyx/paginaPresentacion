@@ -3,6 +3,7 @@ const express = require("express")
 const hbs = require("hbs")
 
 const runScript = require("./utils/runScript")
+const statusScript = require("./utils/statusScript")
 
 const app = express()
 
@@ -47,6 +48,21 @@ app.get("/about", (req, res) => {
     })
 })
 
+app.get("/status", (req, res) => {
+    if (!req.query.code) {
+        return res.send({
+            error: "You must provide a code for getting a status..."
+        })
+    }
+
+    statusScript(req.query.code, (error, results) => {
+        if (error) {
+            return res.send({ error })
+        }
+        res.send({ results })
+    })
+})
+
 app.get("/script", (req, res) => {
     if (!req.query.firstClass || !req.query.economy || !req.query.children || !req.query.hours) {
         return res.send({
@@ -54,10 +70,11 @@ app.get("/script", (req, res) => {
         })
     }
 
-    runScript(req.query.firstClass, req.query.economy, req.query.children, req.query.hours).then((data) => {
-        res.send({ data })
-    }).catch((e) => {
-        res.send({ e })
+    runScript(req.query.firstClass, req.query.economy, req.query.children, req.query.hours, (error, results) => {
+        if (error) {
+            return res.send({ error })
+        }
+        res.send({ results })
     })
 })
 
