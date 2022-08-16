@@ -21,7 +21,9 @@ hbs.registerPartials(partialsPath)
 // Setup static directory
 app.use(express.static(publicDirPath))
 
-app.get("/status", cors(), (req, res) => {
+app.use(cors())
+
+app.get("/status", (req, res) => {
     if (!req.query.code) {
         return res.send({
             error: "You must provide a code for getting a status..."
@@ -36,7 +38,7 @@ app.get("/status", cors(), (req, res) => {
     })
 })
 
-app.get("/script", cors(), (req, res) => {
+app.get("/script", (req, res) => {
     if (!req.query.firstClass || !req.query.economy || !req.query.children || !req.query.hours) {
         return res.send({
             error: "You must provide a value for every field..."
